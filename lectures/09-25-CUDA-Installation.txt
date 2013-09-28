@@ -1,0 +1,46 @@
+The following are steps to setup CUDA on Windows and test run the CUDA exercises. It will describe the setup process for 64-bit systems.
+All instructions in this post will list directories for default install locations. It is strongly recommended that you do not deviate from the default settings.
+NVIDIA's documentation for installing CUDA on windows can be found at the link below.
+http://developer.download.nvidia.com/compute/cuda/5_5/rel/docs/CUDA_Getting_Started_Windows.pdf
+
+0. Before you start installing CUDA, make sure you have the following. All Microsoft software can be fetched from MSDN/Dreamspark website.
+	Windows x64 (of course!)
+	Visual Studio (2012 preferred, 2010 will work as well)
+
+1. Download and install the latest NVIDIA GPU drivers for your device. 
+	Use the link: www.nvidia.com/Drivers. 
+	It is suggested that you download and install the latest stable drivers. However, you may experiment by downloading beta drivers. NVIDIA's beta drivers are quite stable if you want to give it a shot.
+
+2. Download and install the CUDA toolkit.
+	Use the link: https://developer.nvidia.com/cuda-downloads for the latest version.
+	If you wish to have previous versions installed, make sure you install the older versions before installing the newer versions.
+	The older versions of CUDA toolkit can be found at: https://developer.nvidia.com/cuda-toolkit-archive
+	Make sure you have the appropriate CUDA* environment variable set. To check this go to Control Panel -> System -> Advance System Settings -> Advance (tab) -> Environment Variables. Also check the PATH variable to see whether the CUDA path is present.
+	Once you have completed installation, run the CUDA samples that were installed to make sure everything is running well. Samples are located at C:\ProgramData\NVIDIA Corporation\CUDA Samples\v5.5 (you may replace v5.5 with the version you have installed). 
+
+3. Download and install NVIDIA Nsight for Visual Studio 3.1 (or latest version)
+	To download Nsight, you will need to be a registered user.
+	The main page for NSight is https://developer.nvidia.com/nvidia-nsight-visual-studio-edition.
+	Follow the appropriate links to register. You will have to fill up a questionnaire. Fill it appropriately. An incomplete or bad application is very very likely to be rejected.
+	It may take a few days for your application to be approved. So do not leave this step to last minute.
+	Once you have been approved, download and install it.
+	If by chance you are not approved, you can ask one of you friends to share the downloaded file. But do work on getting approved.
+	You will need Administrator access to run NSight. So if you are using a computer (such as in the lab) to code where you do not have admin access, try getting it. Request Patrick to arrange this if you need it.
+
+4. It is recommended that you copy the NV Tools Ext binaries to system directories. Copy
+	C:\Program Files\NVIDIA GPU Computing Toolkit\nvToolsExt\bin\x64\*.dll to C:\Windows\System32\
+	C:\Program Files\NVIDIA GPU Computing Toolkit\nvToolsExt\bin\Win32\*.dll to C:\Windows\SysWow64\
+	Alternatively, you can copy these files to the executable folders of your projects
+	Once you have installed all these, start Visual Studio and create a CUDA project. By default, the code created should run out of the box. Run it and make sure everything is working well. Run NSight as well.
+
+The following is specific to the special session to be held on Sept 25 2013.
+Running the CUDA Exercises:
+	If you are using Visual Studio 2012, use the CUDA_Exercise.sln (uses CUDA 5.5) and for 2012 use CUDA_Exercise_2010.sln (uses CUDA 5.0). 
+	Both solutions have been preconfigured appropriately, but feel free to change things around. One thing you may need to change is the compute version.
+	Go to Project Properties -> CUDA C/C++ -> Device -> Code Generation. Enter compute_##,sm_##. Where ## is 30 for Kepler, 20 for Fermi, 35 for K20/Titan/780, and 1x for pre-Fermi card. 
+	You can check highest compute versions for your GPU https://developer.nvidia.com/cuda-gpus. The number is same as "compute compatibility" without the decimal point.
+	If the CUDA version does not match, then right click on the project and choose "Build Customizations". Choose the CUDA version you would like to use.
+
+Anyone wanting to code on Linux has my thumbs up. I have included a makefile for the CUDA Exercises to run on Linux. If you are interested, send me an email and I will personally assist you in installing and ensuring everything runs.
+
+For any questions or trouble installing, you can email me at shehzan@accelereyes.com
